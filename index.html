@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arena do Robô</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+.ups{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.up{display:flex;gap:12px;align-items:center;text-align:left;background:var(--deep);border:2px solid var(--line);border-radius:14px;padding:12px 14px;min-height:64px}
+.up:hover,.up:focus-visible{border-color:var(--sky)}
+.up .ic{font-size:26px;flex:none;width:36px;text-align:center}
+.up b{display:block;font-size:16px}
+.up span{color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="term">
+    <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+    <span class="file">arena.js</span>
+    <span class="school">CETI PROF. JOSÉ AMÁVEL</span>
+  </div>
+
+  <div class="stage" id="stage">
+    <canvas id="cv" aria-label="Arena do robô vista de cima"></canvas>
+
+    <div class="hud" id="hud" hidden>
+      <div class="hud-left">
+        <span class="chipbox"><b id="hudScore">0</b><small>pontos</small></span>
+        <span class="chipbox wave"><b id="hudWave">1</b><small>onda</small></span>
+        <span class="chipbox lives"><b id="hudLives">❤❤❤❤❤</b><small>vida</small></span>
+      </div>
+      <div class="hud-right">
+        <button type="button" class="icon" id="btnSound" aria-label="Som ligado">🔊</button>
+        <button type="button" class="icon" id="btnPause" aria-label="Pausar">⏸</button>
+      </div>
+    </div>
+
+    <div class="overlay" id="startScreen">
+      <div class="box">
+        <p class="eyebrow">Arena de defesa</p>
+        <h1>Arena <span>do Robô</span></h1>
+        <p class="lead">Bugs, vírus e vermes estão invadindo o servidor. Seu robô atira sozinho: você só precisa se mover e sobreviver às ondas!</p>
+        <ul class="legend">
+          <li><i class="sw bugx"></i><span><b>Bug</b> corre atrás de você</span></li>
+          <li><i class="sw virus"></i><span><b>Vírus</b> se divide em dois</span></li>
+          <li><i class="sw worm"></i><span><b>Verme</b> rápido e em zigue-zague</span></li>
+          <li><i class="sw drone"></i><span><b>Hacker</b> atira de longe</span></li>
+        </ul>
+        <div class="controls">
+          <p><b>Celular:</b> arraste o dedo no lado <b>esquerdo</b> para andar. No lado <b>direito</b>, arraste para escolher a mira (sem tocar, ele mira sozinho).</p>
+          <p><b>Computador:</b> W A S D ou setas para andar. O mouse escolhe a mira.</p>
+          <p>Depois de cada onda, escolha uma <b>melhoria</b>.</p>
+        </div>
+        <button type="button" class="play" id="btnPlay">▶ Jogar</button>
+        <p class="best" id="bestStart">Recorde: 0</p>
+      </div>
+    </div>
+
+    <div class="overlay" id="upScreen" hidden>
+      <div class="box">
+        <p class="eyebrow" id="upTag">Onda 1 concluída</p>
+        <h2>Escolha uma melhoria</h2>
+        <div class="ups" id="ups"></div>
+      </div>
+    </div>
+
+    <div class="overlay" id="pauseScreen" hidden>
+      <div class="box small">
+        <h2>Pausado</h2>
+        <button type="button" class="play" id="btnResume">▶ Continuar</button>
+      </div>
+    </div>
+
+    <div class="overlay" id="overScreen" hidden>
+      <div class="box">
+        <p class="eyebrow" id="overTag">Fim de jogo</p>
+        <h2 id="overTitle">Robô desligado!</h2>
+        <div class="stats">
+          <div><b id="overScore">0</b><small>pontos</small></div>
+          <div><b id="overWave">1</b><small>onda</small></div>
+          <div><b id="overKills">0</b><small>destruídos</small></div>
+        </div>
+        <p class="best" id="overBest">Recorde: 0</p>
+        <button type="button" class="play" id="btnAgain">↻ Jogar de novo</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot">Celular: esquerda anda, direita mira · Computador: W A S D e mouse</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
